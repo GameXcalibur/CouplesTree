@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Couples Tree</title>
+        <link rel="icon" href="{{ asset('img') }}/logoicon.png">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -27,10 +28,10 @@
                 justify-content: center;
                 flex-direction: row;
                 position: relative;
-                background-image: url("{{ asset('img') }}/bark.jpg");
+                background-image: url("{{ asset('img') }}/barktile.jpg");
 
-                background-size: cover;
-                background-repeat: no-repeat;
+                /* background-size: cover; */
+                background-repeat: repeat;
                 background-position: center center;
                 max-height: 200vh !important;
                 /* overflow-y: auto !important; */

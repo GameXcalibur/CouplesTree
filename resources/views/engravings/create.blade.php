@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Couples Tree</title>
+        <link rel="icon" href="{{ asset('img') }}/logoicon.png">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -34,15 +35,17 @@
                 justify-content: center;
                 flex-direction: row;
                 position: relative;
-                background-image: url("{{ asset('img') }}/bark.jpg");
+                background-image: url("{{ asset('img') }}/barktile.jpg");
 
-                background-size: cover;
-                background-repeat: no-repeat;
+                /* background-size: cover; */
+                background-repeat: repeat;
                 background-position: center center;
-                max-height: 200vh !important;
+                max-height: 300vh !important;
                 /* overflow-y: auto !important; */
                 width: 100%;
-                height: 100vh;
+                min-height: 100vh;
+                height: 100%;
+                overflow: hidden;
                 left: 0px;
                 top: 0px;
             }
@@ -53,7 +56,7 @@
                 height: 5%;
                 width: 100%;	
                 overflow: hidden;
-                position: absolute;
+                position: fixed;
                 background: #FFB6C1;
                 color: #000000;
                 border: 1px solid #ffffff;
@@ -92,6 +95,21 @@
                 border-style: solid;
                 border-width: 2px;
             }
+            #previewBlock{
+                background-image: url("{{ asset('img') }}/barktiletest.jpg");
+
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+                /* overflow-y: auto !important; */
+                width: 50vh;
+                height: 50vh;
+                border-radius: 15px;
+            }
+
+            #productSelect{
+                width: 50vh;
+            }
 
             @media only screen 
             and (max-width : 500px) {
@@ -108,6 +126,22 @@
                 /* Apply animation to this element */
                 animation: scroll-left 13s linear infinite;
             }
+
+            #previewBlock{
+                background-image: url("{{ asset('img') }}/barktiletest.jpg");
+
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center center;
+                /* overflow-y: auto !important; */
+                width: 25vh;
+                height: 25vh;
+                border-radius: 15px;
+
+            }
+            #productSelect{
+                width: 25vh;
+            }
                 
             }
 
@@ -117,7 +151,7 @@
                 /* display: flex; */
                 /* justify-content: center; */
                 /* align-items: center; */
-                background-color: rgba(100,100,100,0.70);
+                background-color: rgba(100,100,100,0.90);
                 color: #ffffff;
                 padding-top: 2%;
                 padding-right: 2%;
@@ -157,50 +191,96 @@
                 left: 0px;
                 top: 6%;
             }
+            #page1{
+                display: block;
+            }
+
+            #page2{
+                display: none;
+            }
+
+            select { text-align-last:center; }
+
         </style>
     </head>
     <body>
     <div id="bg">
-        <div class="scroll-left">
-            <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for ONLY $1!</p>
-        </div>
+
         <!-- <div class="logo"></div> -->
         <div id="createForm">
             <form method="POST" class="create-form" id="create-form" action="{{ route('engravings.store') }}">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12 form-group">
-                            <h2 class="question" style="color: #000;">New Engraving</h2>
+                <div id="page1">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <h2 class="question" style="color: #000;">New Engraving</h2>
+                            </div>
                         </div>
-                    </div>
-                    <!-- First Row - First Name & Surname -->
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <label for="edtName">Your Name</label>
-                            <input type="text" class="form-control" placeholder="Your Name" id="edtName" name="edtName"/>
-                        </div>
-                        <div class="col-sm-6 form-group">
-                                <label for="edtPName">Partners Name</label>
-                            <input type="text" class="form-control" placeholder="Partners Name" id="edtPName" name="edtPName"/>
+                        
+                        <!-- First Row - First Name & Surname -->
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label for="edtName">Your Name</label>
+                                <input type="text" class="form-control" placeholder="Your Name" id="edtName" name="edtName"/>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                    <label for="edtPName">Partners Name</label>
+                                <input type="text" class="form-control" placeholder="Partners Name" id="edtPName" name="edtPName"/>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 form-group">
-                            <label for="edtMessage">Message</label>
-                            <textarea class="form-control" id="edtMessage" name="edtMessage" rows="4"></textarea>
-                            
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="edtMessage">Message</label>
+                                <textarea class="form-control" id="edtMessage" name="edtMessage" rows="4"></textarea>
+                                
+                            </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="form-group">
-                            <button type="button" onclick="showPage2();" class="btn ct-button">{{ __('Next') }}</button>
+                        <div class="row justify-content-center">
+                            <div class="form-group">
+                                <button type="button" onclick="showPage2();" class="btn ct-button">{{ __('Next') }}</button>
 
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div id="page2">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <h2 class="question" style="color: #000;">Preview</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="form-group">
+                                <select id="productSelect" class="form-select custom-select" aria-label="Default select example">
+                                    <option selected value="1">$1 - 1x1</option>
+                                    <option value="2">$2 - 2x2</option>
+                                    <option value="3">$3 - 3x3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="form-group">
+                                <div id="previewBlock"></div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="form-group">
+                                <button type="button" onclick="showPage1();" class="btn ct-button" style="margin-bottom:14px; width:200px;">{{ __('Back') }}</button>
+                                <div id="paypalDiv"></div>
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
             </form>
+        </div>
+        <div class="scroll-left">
+            <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for ONLY $1!</p>
         </div>
         <div class="footer">
             <p>© The Hansen Group - 2021</p>
@@ -208,3 +288,36 @@
     </div>
     </body>
 </html>
+<script src="https://www.paypal.com/sdk/js?client-id=AdJfvrOimR1HPhqlqYsu4r80tyzZk4nU81vKDA58HCrewSAYKbB_M8LvmxOxVfLwN_20hhIAT-6gG18y"></script>
+
+<script>
+function showPage1(){
+    document.getElementById("page1").style.display = "block";
+    document.getElementById("page2").style.display = "none";
+}
+
+function showPage2(){
+    document.getElementById("page2").style.display = "block";
+    document.getElementById("page1").style.display = "none";
+}
+
+paypal.Buttons({
+    createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '22873.70'
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(function(details) {
+        // This function shows a transaction success message to your buyer.
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypalDiv');
+</script>
