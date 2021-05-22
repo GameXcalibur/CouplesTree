@@ -11,8 +11,9 @@ WORKDIR /srv/couplestree
 
 RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
+RUN printf "\n" | pecl install imagick
 
-RUN docker-php-ext-install mbstring pdo pdo_mysql imagick \ 
+RUN docker-php-ext-install mbstring pdo pdo_mysql \ 
     && a2enmod rewrite negotiation \
     && docker-php-ext-install opcache
 
