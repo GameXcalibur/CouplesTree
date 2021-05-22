@@ -51,7 +51,7 @@ class EngravingsController extends Controller
 
 
         /* Font properties */
-        $draw->setFont('Bookman-DemiItalic');
+        $draw->setFont(public_path().'/font/latobi.ttf');
         $draw->setFontSize( 30 );
         $draw->setTextAlignment(\Imagick::ALIGN_CENTER);
         switch($data['text-color']){
