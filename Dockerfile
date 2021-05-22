@@ -9,6 +9,12 @@ COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 WORKDIR /srv/couplestree
 
-RUN docker-php-ext-install mbstring pdo pdo_mysql \ 
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+RUN printf "\n" | pecl install imagick
+
+RUN docker-php-ext-install mbstring pdo pdo_mysql imagick \ 
     && a2enmod rewrite negotiation \
     && docker-php-ext-install opcache
+
+RUN docker-php-ext-enable imagick

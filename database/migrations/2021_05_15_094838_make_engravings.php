@@ -13,7 +13,15 @@ class MakeEngravings extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('engravings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('partners_name');
+            $table->string('message');
+            $table->string('image_path');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Engraving extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'partners_name',
+        'message',
+        'image_path',
+    ];
 }
