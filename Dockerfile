@@ -9,7 +9,7 @@ COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 WORKDIR /srv/couplestree
 
-RUN apt-get update && apt install python3-gdal && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt install -y python3-gdal && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 RUN printf "\n" | pecl install imagick
 
