@@ -39,11 +39,63 @@ class EngravingsController extends Controller
     }
 
     private function generateImage($data){
-        
+
+
+        $image = new \Imagick(public_path()."/img/templates/1x1-2.jpg");
+        $geo=$image->getImageGeometry();
+        $fontSize = 30;
+        $imageMiddleX = 255;
+        $imageYStart = 215;
+        $imageYIncrement = 40;
         /* Create some objects */
-        $image = new \Imagick(public_path()."/img/templates/1x1.jpg");
+        
         $draw = new \ImagickDraw();
         $pixel = new \ImagickPixel( 'gray' );
+
+        switch($data['size']){
+            
+            case "2":
+                $image->clear();
+                $image = new \Imagick(public_path()."/img/templates/2x2-2.jpg");
+
+                $geo=$image->getImageGeometry();
+            
+                $fontSize = 60;
+                $imageMiddleX = 525;
+                $imageYStart = 425;
+                $imageYIncrement = 90;
+                break;
+            case "3":
+                $image->clear();
+                $image = new \Imagick(public_path()."/img/templates/3x3-2.jpg");
+
+                $geo=$image->getImageGeometry();
+            
+                $fontSize = 120;
+                $imageMiddleX = 770;
+                $imageYStart = 620;
+                $imageYIncrement = 180;
+                break;
+            case "4":
+                $image->clear();
+                $image = new \Imagick(public_path()."/img/templates/4x4-2.jpg");
+
+                $geo=$image->getImageGeometry();
+            
+                $fontSize = 180;
+                $imageMiddleX = 1040;
+                $imageYStart = 820;
+                $imageYIncrement = 220;
+                break;
+            case "1":
+                $fontSize = 30;
+                $imageMiddleX = 255;
+                $imageYStart = 215;
+                $imageYIncrement = 40;
+            default:
+                break;
+
+        }
 
 
         /* Black text */
@@ -52,7 +104,7 @@ class EngravingsController extends Controller
 
         /* Font properties */
         $draw->setFont(public_path().'/font/latobi.ttf');
-        $draw->setFontSize( 30 );
+        $draw->setFontSize( $fontSize );
         $draw->setTextAlignment(\Imagick::ALIGN_CENTER);
         switch($data['text-color']){
             case "SILVER":
@@ -68,29 +120,29 @@ class EngravingsController extends Controller
         }
 
         /* Create text */
-        $image->annotateImage($draw, 255, 215, 0, 
+        $image->annotateImage($draw, $imageMiddleX, $imageYStart, 0, 
         $data['name']);
 
-        $image->annotateImage($draw, 255, 255, 0, 
-            '+');
+        $image->annotateImage($draw, $imageMiddleX, $imageYStart + $imageYIncrement, 0, 
+            '&');
 
-        $image->annotateImage($draw, 255, 295, 0, 
+        $image->annotateImage($draw, $imageMiddleX, $imageYStart + ($imageYIncrement*2), 0, 
         $data['partnersName']);
 
         switch($data['frame']){
             case 'ROPE':
                 $frame = new \Imagick(public_path()."/img/frames/ropeframe.png");
-                $frame->resizeImage(512,512, imagick::FILTER_LANCZOS, 0.9, true);
+                $frame->resizeImage($geo['width'],$geo['height'], imagick::FILTER_LANCZOS, 0.9, true);
                 $image->compositeImage($frame, Imagick::COMPOSITE_DEFAULT, 0, 0);
                 break;
             case 'SILVER':
                 $frame = new \Imagick(public_path()."/img/frames/silverframe.png");
-                $frame->resizeImage(512,512, imagick::FILTER_LANCZOS, 0.9, true);
+                $frame->resizeImage($geo['width'],$geo['height'], imagick::FILTER_LANCZOS, 0.9, true);
                 $image->compositeImage($frame, Imagick::COMPOSITE_DEFAULT, 0, 0);
                 break;
             case 'GOLD':
                 $frame = new \Imagick(public_path()."/img/frames/goldframe.png");
-                $frame->resizeImage(512,512, imagick::FILTER_LANCZOS, 0.9, true);
+                $frame->resizeImage($geo['width'],$geo['height'], imagick::FILTER_LANCZOS, 0.9, true);
                 $image->compositeImage($frame, Imagick::COMPOSITE_DEFAULT, 0, 0);
                 break;
             case 'NONE':
@@ -108,7 +160,7 @@ class EngravingsController extends Controller
          * manipulation.
          */
         if($data['action'] == "save")
-            $image->writeImage(storage_path('app').'/'.$data["save_name"].'.png');
+            $image->writeImage(storage_path('app').'/tiles/'.$data["save_name"].'.png');
         $image->clear();
 
         if(isset($frame))

@@ -38,7 +38,7 @@
                 justify-content: center;
                 flex-direction: row;
                 position: relative;
-                background-image: url("{{ asset('img') }}/barktile.jpg");
+                background-image: url("{{ asset('img') }}/barktile2.jpg");
 
                 /* background-size: cover; */
                 background-repeat: repeat;
@@ -53,6 +53,22 @@
                 top: 0px;
             }
 
+            .nav {
+                top:0;
+                left:0;
+                height: 5%;
+                width: 60px;	
+                overflow: hidden;
+                position: absolute;
+                background: #FFB6C1;
+                color: #000000;
+                border: 1px solid #ffffff;
+            }
+            .stretch {
+                width:100%;
+                height:100%;
+                
+            }
             .scroll-left {
                 top:0;
                 left:0;
@@ -99,7 +115,7 @@
                 border-width: 2px;
             }
             #previewBlock{
-                background-image: url("{{ asset('img') }}/barktile.jpg");
+                background-image: url("{{ asset('img') }}/barktile2.jpg");
 
                 background-size: cover;
                 background-repeat: no-repeat;
@@ -115,25 +131,25 @@
             .onebyone{
                 width: 5vh;
                 height: 5vh;
-                background-image:url("{{ asset('img') }}/barktile.jpg");
+                background-image:url("{{ asset('img') }}/barktile2.jpg");
                 border-radius: 10px;
                 }
             .twobytwo{
                 width: 10vh;
                 height: 10vh;
-                background-image:url("{{ asset('img') }}/barktile.jpg");
+                background-image:url("{{ asset('img') }}/barktile2.jpg");
                 border-radius: 10px;
                 }
             .threebythree{
                 width: 15vh;
                 height: 15vh;
-                background-image:url("{{ asset('img') }}/barktile.jpg");
+                background-image:url("{{ asset('img') }}/barktile2.jpg");
                 border-radius: 10px;
                 }
             .fourbyfour{
                 width: 20vh;
                 height: 20vh;
-                background-image:url("{{ asset('img') }}/barktile.jpg");
+                background-image:url("{{ asset('img') }}/barktile2.jpg");
                 border-radius: 10px;
                 }
 
@@ -269,31 +285,31 @@
                 .onebyone{
                 width: 2.5vh;
                 height: 2.5vh;
-                background-image:url("{{ asset('img') }}/barktiletest.jpg");
+                background-image:url("{{ asset('img') }}/barktile2.jpg");
                 border-radius: 10px;
                 }
                 .twobytwo{
                     width: 5vh;
                     height: 5vh;
-                    background-image:url("{{ asset('img') }}/barktiletest.jpg");
+                    background-image:url("{{ asset('img') }}/barktile2.jpg");
                     border-radius: 10px;
                     }
                 .threebythree{
                     width: 7.5vh;
                     height: 7.5vh;
-                    background-image:url("{{ asset('img') }}/barktiletest.jpg");
+                    background-image:url("{{ asset('img') }}/barktile2.jpg");
                     border-radius: 10px;
                     }
                 .fourbyfour{
                     width: 10vh;
                     height: 10vh;
-                    background-image:url("{{ asset('img') }}/barktiletest.jpg");
+                    background-image:url("{{ asset('img') }}/barktile2.jpg");
                     border-radius: 10px;
                     }
 
                 .scroll-left p {
                 position: absolute;
-                width: 180%;
+                width: 200%;
                 height: 100%;
                 margin: 0;
                 line-height: 50px;
@@ -438,6 +454,58 @@
                 pointer-events: none;
             }
 
+            /* Center the loader */
+			#loader {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			width: 120px;
+			height: 120px;
+			margin: -76px 0 0 -76px;
+			border: 16px solid #f3f3f3;
+			border-radius: 50%;
+			border-top: 16px solid #3498db;
+			-webkit-animation: spin 2s linear infinite;
+			animation: spin 2s linear infinite;
+			display: none;
+			}
+
+			@-webkit-keyframes spin {
+			0% { -webkit-transform: rotate(0deg); }
+			100% { -webkit-transform: rotate(360deg); }
+			}
+
+			@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+			}
+
+			/* Add animation to "page content" */
+			.animate-bottom {
+			position: relative;
+			-webkit-animation-name: animatebottom;
+			-webkit-animation-duration: 1s;
+			animation-name: animatebottom;
+			animation-duration: 1s
+			}
+
+			@-webkit-keyframes animatebottom {
+			from { bottom:-100px; opacity:0 } 
+			to { bottom:0px; opacity:1 }
+			}
+
+			@keyframes animatebottom { 
+			from{ bottom:-100px; opacity:0 } 
+			to{ bottom:0; opacity:1 }
+			}
+
+            .tree-button {
+            background-color: #FFB6C1 !important;
+            border-color: #FFB6C1 !important;
+            color: #000000 !important;
+        }
+
         </style>
     </head>
     <body>
@@ -502,6 +570,7 @@
                         <div id="imageCreation">
                             <div class="row justify-content-center">
                                 <div class="form-group col-md-4" align="center">
+                                    <div id="loader"></div>
                                     <div id="previewBlock"></div>
                                 </div>
                                 <div class="form-group col-md-5" align="center">
@@ -608,6 +677,13 @@
         </div>
         <div class="scroll-left">
             <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for ONLY $1!</p>
+        </div>
+        <div class="nav">
+        <img src="{{ asset('img') }}/logoicon.png" class="stretch" alt="" />
+
+        </div>
+        <div style="position: fixed; bottom: 6%; left:0; width:200px;">
+            <button id="viewTreeButton" type="button" class="btn tree-button" onclick="">VIEW THE TREE</button>
         </div>
         <div class="footer">
             <p>© The Hansen Group - 2021</p>
@@ -760,6 +836,7 @@ function showPage2(){
 }
 
 $('input[name="image-size"]').on('click change', function(e) {
+    getPreview('preview');
 initBasket();
 
 });
@@ -799,7 +876,7 @@ function initPaypal(total){
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                window.location.href = "/engravings/view";
+                window.location.href = "/";
             }
         });
       });
@@ -812,7 +889,7 @@ function sleep(ms) {
 $('#confirmButton').click(function(){
 
     var total = initBasket();
-
+    getPreview('save', Date.now());
 
     Swal.fire({
         title: '$'+total+" is due. Do you want to continue?",
@@ -830,6 +907,10 @@ $('#confirmButton').click(function(){
     });
 });
 
+$('#viewTreeButton').click(function(){
+    window.location.href = "/";
+});
+
 function getPreview(action, save_name){
     var name = document.getElementById("edtName").value;
     var partnersName = document.getElementById("edtPName").value;
@@ -838,12 +919,15 @@ function getPreview(action, save_name){
     var fontColor = $("input[name='text-color']:checked").val();
     var frame = $("input[name='frame-select']:checked").val();
     //alert(frame);
+    document.getElementById("loader").style.display = "block";
     $.ajax({
         url: '{{ route("engravings.preview") }}',
         type: "post",
         data: {"_token": "{{ csrf_token() }}", 'name':name,  'partnersName': partnersName, 'message': message, 'frame': frame, 'text-color': fontColor, 'size': size, 'action': action, 'save_name': save_name},
         dataType: 'JSON',
         success: function (data) {
+            document.getElementById("loader").style.display = "none";
+
           $("#previewBlock").css("background-image", "url('" + data.preview + "')");
 
           $(".onebyone").css("background-image", "url('" + data.preview + "')");

@@ -50,7 +50,17 @@
                 left: 0px;
                 top: 0px;
             }
-
+            .nav {
+                top:0;
+                left:0;
+                height: 5%;
+                width: 60px;	
+                overflow: hidden;
+                position: absolute;
+                background: #FFB6C1;
+                color: #000000;
+                border: 1px solid #ffffff;
+            }
             .scroll-left {
                 top:0;
                 left:0;
@@ -117,7 +127,7 @@
                 }
                 .scroll-left p {
                 position: absolute;
-                width: 180%;
+                width: 200%;
                 height: 100%;
                 margin: 0;
                 line-height: 50px;
@@ -132,17 +142,34 @@
 
             #mapid { height: 90%; width:100%; }
 
+            .stretch {
+                width:100%;
+                height:100%;
+                
+            }
+
+            #mapNewButton{
+                border-radius: 10px;
+                text-align: center;
+
+            }
+
         </style>
     </head>
     <body>
     <div id="bg">
         <div class="scroll-left">
-            <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for ONLY $1!</p>
+            <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for AS LOW AS <b>$1.00!</b></p>
         </div>
         <div id="mapid"></div>
+        <div class="nav">
+        <img src="{{ asset('img') }}/logoicon.png" class="stretch" alt="" />
+
+        </div>
         <div class="footer">
             <p>© The Hansen Group - 2021</p>
         </div>
+
     </div>
     </body>
 </html>
@@ -162,12 +189,47 @@
 // { 
   
 // }).addTo(mymap);
+var customControl =  L.Control.extend({
 
-var minZoom = 0
+options: {
+  position: 'bottomleft'
+},
+
+onAdd: function (map) {
+  var container = L.DomUtil.create('input');
+  container.type="button";
+  container.title="NEW ENGRAVING";
+  container.value = "NEW ENGRAVING";
+  container.style.backgroundColor = '#FFB6C1';
+  container.id = "mapNewButton";
+
+  //container.style.backgroundColor = 'white';     
+//   container.style.backgroundImage = "url(https://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
+//   container.style.backgroundSize = "30px 30px";
+  container.style.width = '200px';
+  container.style.height = '30px';
+  
+  container.onmouseover = function(){
+    container.style.backgroundColor = '#FFc6d1'; 
+  }
+  container.onmouseout = function(){
+    container.style.backgroundColor = '#FFB6C1'; 
+  }
+
+  container.onclick = function(){
+    window.location.href = "/engravings/create";
+  }
+
+  return container;
+}
+});
+
+
+var minZoom = 3
     var maxZoom = 5
     var img = [
-      3831, // original width of image `karta.jpg`
-      3101  // original height of image
+      7168, // original width of image `karta.jpg`
+      4096  // original height of image
     ]
 
     // create the map
@@ -192,7 +254,8 @@ var minZoom = 0
     // }).addTo(map)
 
     // the tile layer containing the image generated with gdal2tiles --leaflet ...
-    L.tileLayer('{{ asset("img") }}/tree/{z}/{x}/{y}.png', {
+    L.tileLayer('{{ asset("img") }}/tree2/{z}/{x}/{y}.png', {
       noWrap: true,
     }).addTo(map)
+    map.addControl(new customControl());
 </script>
