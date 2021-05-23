@@ -228,8 +228,8 @@ onAdd: function (map) {
 var minZoom = 3
     var maxZoom = 5
     var img = [
-      7168, // original width of image `karta.jpg`
-      4096  // original height of image
+      {{$width}}, // original width of image `karta.jpg`
+      {{$height}}  // original height of image
     ]
 
     // create the map
@@ -254,7 +254,7 @@ var minZoom = 3
     // }).addTo(map)
 
     // the tile layer containing the image generated with gdal2tiles --leaflet ...
-    L.tileLayer('{{ asset("img") }}/tree2/{z}/{x}/{y}.png', {
+    L.tileLayer('{{ asset("img") }}/tree/{z}/{x}/{y}.png', {
       noWrap: true,
     }).addTo(map)
     map.addControl(new customControl());

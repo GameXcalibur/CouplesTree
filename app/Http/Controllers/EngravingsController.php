@@ -10,8 +10,11 @@ use ImagickDraw;
 class EngravingsController extends Controller
 {
     public function index(Engraving $model){
-        return view('engravings.index');
-        //return view('engravings.index', ['engravings' => $model::where('status', '=', '0')->get()]);
+        //return view('engravings.index');
+        $image = new \Imagick(public_path()."/img/tiles/result.jpg");
+        $geo=$image->getImageGeometry();
+        $image->clear();
+        return view('engravings.index', ['width' => $geo['width'], 'height' => $geo['height']]);
     }
 
     public function create(){
@@ -150,7 +153,10 @@ class EngravingsController extends Controller
                 break;
         }
         /* Give image a format */
-        $image->setImageFormat('png');
+        $image->setImageFormat('jpg');
+        $image->setImageCompression(true);
+        $image->setCompression(Imagick::COMPRESSION_JPEG);
+        $image->setImageCompressionQuality(60);
 
         $imgBuff = $image->getimageblob();
 
@@ -159,8 +165,10 @@ class EngravingsController extends Controller
          * object. Thus, freeing the system resources allocated for doing our image
          * manipulation.
          */
-        if($data['action'] == "save")
-            $image->writeImage(storage_path('app').'/tiles/'.$data["save_name"].'.png');
+        if($data['action'] == "save"){
+            $image->writeImage(public_path().'/img/tiles/'.$data["save_name"].'.jpg');
+            system('cd '.public_path()."/img/tiles/ && sh createmap.sh");
+        }
         $image->clear();
 
         if(isset($frame))

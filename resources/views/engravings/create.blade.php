@@ -38,7 +38,7 @@
                 justify-content: center;
                 flex-direction: row;
                 position: relative;
-                background-image: url("{{ asset('img') }}/barktile2.jpg");
+                background-image: url("{{ asset('img') }}/barktile3.jpg");
 
                 /* background-size: cover; */
                 background-repeat: repeat;
@@ -695,8 +695,11 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AeutJkeLHxrNByWNQUdWJ6ULBYbnFD3JPtRI0hrBgy9YLmU2VJatbXajy-LtJpc6TgcF866RaKnbwG03"></script>
 
 <script>
+  $(document).ready(function () {
+    initBasket();
 
-initBasket();
+      
+  });
 
 function initBasket(){
     var basket = {};
@@ -774,8 +777,9 @@ function initBasket(){
             basket[2] = basketItem;
             break;
     }
-basketItem = {};
+    basketItem = {};
     switch(fontColor){
+        default:
         case "DEFAULT":
             basketItem['desc'] = "Color : Default";
             basketItem['text-price'] = "$0.00";
