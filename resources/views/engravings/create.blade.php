@@ -309,7 +309,7 @@
 
                 .scroll-left p {
                 position: absolute;
-                width: 200%;
+                width: 250%;
                 height: 100%;
                 margin: 0;
                 line-height: 50px;
@@ -667,7 +667,8 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="form-group">
-                                <button type="button" onclick="showPage1();" class="btn ct-button" style="margin-bottom:14px; width:200px;">{{ __('Back') }}</button>
+                                <button id="reloadBack" type="button" onclick="showPage1();" class="btn ct-button" style="margin-bottom:14px; width:200px;">{{ __('Back') }}</button>
+                                <button id="paymentBack" type="button" onclick="backPayment();" class="btn ct-button" style="margin-bottom:14px; width:200px; display:none;">{{ __('Back') }}</button>
                                 <div id="paypalDiv"></div>
                             </div>
                         </div>
@@ -676,7 +677,7 @@
             </form>
         </div>
         <div class="scroll-left">
-            <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for ONLY $1!</p>
+            <p>Eternalize your relationship with that special someone! Make an engraving on the Couples Tree for AS LOW AS <b>$1.00!</b></p>
         </div>
         <div class="nav">
         <img src="{{ asset('img') }}/logoicon.png" class="stretch" alt="" />
@@ -823,6 +824,14 @@ basketItem = {};
     //console.log(basket);
 
 }
+function backPayment(){
+    document.getElementById("imageCreation").style.display = "block";
+    document.getElementById("confirmButton").style.display = "block";
+    document.getElementById("paymentBack").style.display = "none";
+    document.getElementById("reloadBack").style.display = "block";
+
+    document.getElementById("paypalDiv").innerHTML = "";
+}
 function showPage1(){
     window.location.reload(false);
     // document.getElementById("page1").style.display = "block";
@@ -892,16 +901,18 @@ $('#confirmButton').click(function(){
     getPreview('save', Date.now());
 
     Swal.fire({
-        title: '$'+total+" is due. Do you want to continue?",
+        title: 'Your total is $'+total+".",
         showCancelButton: true,
-        confirmButtonText: `Confirm`,
+        confirmButtonText: `Pay`,
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
 
-            $("#imageCreation").addClass("disable-div");
+            //$("#imageCreation").addClass("disable-div");
+            document.getElementById("imageCreation").style.display = "none";
             document.getElementById("confirmButton").style.display = "none";
-            Swal.fire('You\'re one step closer! Please use the payment methods below to complete your purchase.', '', 'success');
+            document.getElementById("paymentBack").style.display = "block";
+            document.getElementById("reloadBack").style.display = "none";
             initPaypal(total);
         }
     });
