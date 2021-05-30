@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rm -rf tree
-rm -rf result1.jpg
 
 export GDAL_ALLOW_LARGE_LIBJPEG_MEM_ALLOC=1
 
@@ -15,5 +14,5 @@ rm -rf ../tree
 
 cp -rf tree ../
 
-mv result1.jpg result.jpg
+mv result1.jpg main/result.jpg
 

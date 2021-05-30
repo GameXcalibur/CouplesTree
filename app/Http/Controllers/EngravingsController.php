@@ -11,7 +11,7 @@ class EngravingsController extends Controller
 {
     public function index(Engraving $model){
         //return view('engravings.index');
-        $image = new \Imagick(public_path()."/img/tiles/result.jpg");
+        $image = new \Imagick(public_path()."/img/tiles/main/result.jpg");
         $geo=$image->getImageGeometry();
         $image->clear();
         return view('engravings.index', ['width' => $geo['width'], 'height' => $geo['height']]);
