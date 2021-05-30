@@ -127,7 +127,7 @@
                 }
                 .scroll-left p {
                 position: absolute;
-                width: 200%;
+                width: 250%;
                 height: 100%;
                 margin: 0;
                 line-height: 50px;
@@ -192,7 +192,7 @@
 var customControl =  L.Control.extend({
 
 options: {
-  position: 'bottomleft'
+  position: 'topright'
 },
 
 onAdd: function (map) {
