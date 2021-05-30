@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Engraving;
 use Imagick;
 use ImagickDraw;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class EngravingsController extends Controller
 {
@@ -188,7 +190,12 @@ class EngravingsController extends Controller
                 'image_path' => public_path().'/img/tiles/'.$data["save_name"].'.jpg',
             ]);
             $image->writeImage(public_path().'/img/tiles/'.$data["save_name"].'.jpg');
-            system('cd '.public_path()."/img/tiles/ && sh createmap.sh");
+            //system('cd '.public_path()."/img/tiles/ && sh createmap.sh");
+            $process = new Process(['sh', "createmap.sh"]);
+            $process->setWorkingDirectory(public_path()."/img/tiles/");
+            $process->run();
+            
+            // /error_log();
         }
         $image->clear();
 
