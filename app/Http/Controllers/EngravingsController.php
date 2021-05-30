@@ -50,6 +50,7 @@ class EngravingsController extends Controller
         $imageMiddleX = 255;
         $imageYStart = 215;
         $imageYIncrement = 40;
+        $messageY = 200;
         /* Create some objects */
         
         $draw = new \ImagickDraw();
@@ -67,6 +68,8 @@ class EngravingsController extends Controller
                 $imageMiddleX = 525;
                 $imageYStart = 425;
                 $imageYIncrement = 90;
+                $messageY = 450;
+
                 break;
             case "3":
                 $image->clear();
@@ -78,6 +81,8 @@ class EngravingsController extends Controller
                 $imageMiddleX = 770;
                 $imageYStart = 620;
                 $imageYIncrement = 180;
+                $messageY = 720;
+
                 break;
             case "4":
                 $image->clear();
@@ -89,12 +94,16 @@ class EngravingsController extends Controller
                 $imageMiddleX = 1040;
                 $imageYStart = 820;
                 $imageYIncrement = 220;
+                $messageY = 1000;
+
                 break;
             case "1":
                 $fontSize = 30;
                 $imageMiddleX = 255;
                 $imageYStart = 215;
                 $imageYIncrement = 40;
+                $messageY = 220;
+
             default:
                 break;
 
@@ -132,6 +141,12 @@ class EngravingsController extends Controller
         $image->annotateImage($draw, $imageMiddleX, $imageYStart + ($imageYIncrement*2), 0, 
         $data['partnersName']);
 
+        $draw->setFont(public_path().'/font/gv.otf');
+        $draw->setFontSize( $fontSize*1.5 );
+        $draw->setFillColor('#ffffff');
+        $image->annotateImage($draw, $imageMiddleX, $imageYStart + $messageY, 0, 
+        $data['message']);
+
         switch($data['frame']){
             case 'ROPE':
                 $frame = new \Imagick(public_path()."/img/frames/ropeframe.png");
@@ -166,6 +181,12 @@ class EngravingsController extends Controller
          * manipulation.
          */
         if($data['action'] == "save"){
+            $engraving = Engraving::create([
+                'name' => $data['name'],
+                'partners_name' => $data['partnersName'],
+                'message' => $data['message'],
+                'image_path' => public_path().'/img/tiles/'.$data["save_name"].'.jpg',
+            ]);
             $image->writeImage(public_path().'/img/tiles/'.$data["save_name"].'.jpg');
             system('cd '.public_path()."/img/tiles/ && sh createmap.sh");
         }

@@ -526,18 +526,18 @@
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label for="edtName">Your Name</label>
-                                <input type="text" class="form-control" placeholder="Your Name" id="edtName" name="edtName"/>
+                                <input type="text" class="form-control" placeholder="Your Name" id="edtName" name="edtName" maxlength = "8"/>
                             </div>
                             <div class="col-sm-6 form-group">
                                     <label for="edtPName">Partners Name</label>
-                                <input type="text" class="form-control" placeholder="Partners Name" id="edtPName" name="edtPName"/>
+                                <input type="text" class="form-control" placeholder="Partners Name" id="edtPName" name="edtPName" maxlength = "8"/>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label for="edtMessage">Message</label>
-                                <textarea class="form-control" id="edtMessage" name="edtMessage" rows="4"></textarea>
+                                <textarea class="form-control" id="edtMessage" name="edtMessage" rows="1" maxlength = "18"></textarea>
                                 
                             </div>
                         </div>
