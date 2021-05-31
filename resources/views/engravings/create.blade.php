@@ -692,7 +692,7 @@
     </div>
     </body>
 </html>
-<script src="https://www.paypal.com/sdk/js?client-id=AeutJkeLHxrNByWNQUdWJ6ULBYbnFD3JPtRI0hrBgy9YLmU2VJatbXajy-LtJpc6TgcF866RaKnbwG03"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AWPuAv6xilkz9mZwVLeIzmhUqNyIc2TyLRxppIvXLTErEh8IfrdOEMTQNci_9hJUJJznP4DGBvP7sboc"></script>
 
 <script>
   $(document).ready(function () {
@@ -902,7 +902,7 @@ function sleep(ms) {
 $('#confirmButton').click(function(){
 
     var total = initBasket();
-    getPreview('save', Date.now());
+    //getPreview('save', Date.now());
 
     Swal.fire({
         title: 'Your total is $'+total+".",
