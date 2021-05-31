@@ -53,7 +53,7 @@
             .nav {
                 top:0;
                 left:0;
-                height: 5%;
+                height: 5vh;
                 width: 60px;	
                 overflow: hidden;
                 position: absolute;
@@ -64,7 +64,7 @@
             .scroll-left {
                 top:0;
                 left:0;
-                height: 5%;
+                height: 5vh;
                 width: 100%;	
                 overflow: hidden;
                 position: absolute;
@@ -99,7 +99,7 @@
                 left: 0;
                 bottom: 0;
                 width: 100%;
-                height: 5%;
+                height: 5vh;
                 background-color: #FFB6C1;
                 color: #000000;
                 text-align: center;
