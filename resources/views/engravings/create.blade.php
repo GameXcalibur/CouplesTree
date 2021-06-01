@@ -915,7 +915,7 @@ function sleep(ms) {
 $('#confirmButton').click(function(){
 
     var total = initBasket();
-    //getPreview('save', Date.now());
+    getPreview('save', Date.now());
 
     Swal.fire({
         title: 'Your total is $'+total+".",
